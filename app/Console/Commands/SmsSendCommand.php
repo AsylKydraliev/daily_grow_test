@@ -47,10 +47,6 @@ class SmsSendCommand extends Command
             if ($recipient) {
                 $phones = preg_split("/[\s,;]+/", $client->phone);
 
-                // TODO если ответ успешный то записать статус в таблицу рассылок для аналитики
-                // TODO для аналитики, вывести количество отправленных, и кол-во доставленных, нужно будет записывать эти значения
-                // TODO настроить отправку смс на сервере
-
                 $this->smsService->sendSMS(
                     env('SMS_SEND_API_LOGIN'),
                     env('SMS_SEND_API_PASSWORD'),
