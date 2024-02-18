@@ -41,14 +41,14 @@ import { Link } from "@inertiajs/vue3";
                             </Link>
                         </li>
                         <li class="rounded-sm">
-                            <a
-                                href="#"
+                            <Link
+                                :href="route('mailings.analytics')"
                                 class="flex items-center p-2 space-x-3 rounded-md"
                             >
                                 <img src="../../../public/assets/analytics.png" alt="analytics" />
 
                                 <span>Аналитика</span>
-                            </a>
+                            </Link>
                         </li>
                         <li class="rounded-sm">
                             <a
@@ -60,7 +60,7 @@ import { Link } from "@inertiajs/vue3";
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke-width="1.5"
-                                    stroke="currentColor"
+                                    stroke="#C7C7C7"
                                     class="w-6 h-6"
                                 >
                                     <path
@@ -70,7 +70,7 @@ import { Link } from "@inertiajs/vue3";
                                     />
                                 </svg>
 
-                                <span>Logout</span>
+                                <span>Выйти</span>
                             </a>
                         </li>
                     </ul>

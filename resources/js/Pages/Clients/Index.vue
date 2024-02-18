@@ -25,6 +25,9 @@ const tabComponents = [
 
 <template>
     <MainLayout>
-        <TabsComponent :tabs="tabs" :tabComponents="tabComponents"></TabsComponent>
+        <TabsComponent
+            :tabs="tabs"
+            :tabComponents="tabComponents"
+        ></TabsComponent>
     </MainLayout>
 </template>

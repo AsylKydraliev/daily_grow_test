@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ClientController;
 use \App\Http\Controllers\MailingController;
+use \App\Http\Controllers\MailingAnalyticsController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -24,4 +25,5 @@ Route::resource('/clients', ClientController::class);
 Route::resource('/mailings', MailingController::class);
 
 Route::post('/clients/importExcel', [ClientController::class, 'importExcel'])->name('clients.importExcel');
+Route::get('/analytics', [MailingAnalyticsController::class, 'index'])->name('mailings.analytics');
 

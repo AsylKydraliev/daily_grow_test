@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('mailings', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('sent_count')->nullable()->default(0);
+            $table->integer('delivered_count')->nullable()->default(0);
             $table->text('message');
             $table->timestamps();
         });

@@ -13,5 +13,6 @@ class MailingsSeeder extends Seeder
      */
     public function run(): void
     {
+        Mailing::factory(50)->create();
     }
 }

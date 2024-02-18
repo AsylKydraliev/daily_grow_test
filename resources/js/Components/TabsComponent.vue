@@ -1,34 +1,26 @@
-<script>
-import {ref} from 'vue';
+<script setup>
+import { ref } from 'vue';
 
-export default {
-    props: {
-        tabs: {
-            type: Array,
-            required: true
-        },
-        initialTab: {
-            type: Number,
-            default: 0,
-            required: false
-        },
-        tabComponents: {
-            type: Array,
-            required: true
-        },
+const props = defineProps({
+    tabs: {
+        type: Array,
+        required: true
     },
-    setup(props) {
-        const activeTab = ref(props.initialTab);
+    initialTab: {
+        type: Number,
+        default: 0,
+        required: false
+    },
+    tabComponents: {
+        type: Array,
+        required: true
+    },
+});
 
-        const setActiveTab = (index) => {
-            activeTab.value = index;
-        };
+const activeTab = ref(props.initialTab);
 
-        return {
-            activeTab,
-            setActiveTab
-        };
-    }
+const setActiveTab = (index) => {
+    activeTab.value = index;
 };
 </script>
 
@@ -52,7 +44,10 @@ export default {
             :key="index"
         >
             <keep-alive>
-                <component :is="tabComponent.name" :props="tabComponent.props"></component>
+                <component
+                    :is="tabComponent.name"
+                    :props="tabComponent.props"
+                ></component>
             </keep-alive>
         </div>
     </div>

@@ -15,14 +15,15 @@ use Exception;
 
 class ClientController extends Controller
 {
-    /**
-     * @return Response
-     */
-    public function index(): Response
+    public function index(Request $request): Response
     {
+        $search = $request->get('search');
+
         $clients = Client::query()
+            ->where('name', 'like', '%' . $search . '%')
             ->orderByDesc('created_at')
-            ->paginate(10);
+            ->paginate(10)
+            ->withQueryString();
 
         return Inertia::render('Clients/Index', [
             'clients' => $clients
