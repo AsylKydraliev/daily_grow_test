@@ -25,8 +25,11 @@ class ClientController extends Controller
             ->paginate(10)
             ->withQueryString();
 
+        $clientsCount = Client::query()->count('id');
+
         return Inertia::render('Clients/Index', [
-            'clients' => $clients
+            'clients' => $clients,
+            'clientsCount' => $clientsCount,
         ]);
     }
 

@@ -4,7 +4,7 @@ use App\Http\Controllers\ClientController;
 use \App\Http\Controllers\MailingController;
 use \App\Http\Controllers\MailingAnalyticsController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+use \App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,14 +17,12 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Home');
-})->name('home');
+Route::get('/', [DashboardController::class, 'index'])->name('home');
+Route::get('/analytics', [MailingAnalyticsController::class, 'index'])->name('mailings.analytics');
+
+Route::post('/clients/importExcel', [ClientController::class, 'importExcel'])->name('clients.importExcel');
+Route::post('/mailings/setActive/{mailing}', [MailingController::class, 'setActive'])->name('mailings.setActive');
 
 Route::resource('/clients', ClientController::class);
 Route::resource('/mailings', MailingController::class);
-
-Route::get('/analytics', [MailingAnalyticsController::class, 'index'])->name('mailings.analytics');
-Route::post('/clients/importExcel', [ClientController::class, 'importExcel'])->name('clients.importExcel');
-Route::post('/mailings/setActive/{mailing}', [MailingController::class, 'setActive'])->name('mailings.setActive');
 

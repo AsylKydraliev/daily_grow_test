@@ -6,6 +6,7 @@ import TabsComponent from "@/Components/TabsComponent.vue";
 
 const props = defineProps({
     clients: Object,
+    clientsCount: Number
 });
 
 const tabs = ['Список клиентов', 'Загрузка клиентов'];
@@ -14,7 +15,8 @@ const tabComponents = [
     {
         name: ClientsList,
         props: {
-            clients: props.clients
+            clients: props.clients,
+            clientsCount: props.clientsCount
         }
     },
     {

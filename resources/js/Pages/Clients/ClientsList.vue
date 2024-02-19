@@ -4,7 +4,7 @@ import {Link, router} from "@inertiajs/vue3";
 import {ref, watch} from "vue";
 
 defineProps({
-    props: Object
+    props: Object,
 });
 
 const search = ref('');
@@ -37,7 +37,7 @@ watch(search, value => {
         />
     </div>
 
-    <div class="flex justify-between items-center mb-5">
+    <div class="flex justify-between items-center mb-2">
         <h3 class="text-xl font-bold">Список клиентов</h3>
 
         <div class="flex items-center gap-2 justify-center">
@@ -47,6 +47,8 @@ watch(search, value => {
             </Link>
         </div>
     </div>
+
+    <div class="font-medium text-gray-600 mb-6">Клиентов: {{ props.clientsCount }}</div>
 
     <div class="relative overflow-x-auto mb-6">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">

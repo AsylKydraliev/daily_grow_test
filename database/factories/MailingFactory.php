@@ -19,9 +19,9 @@ class MailingFactory extends Factory
         return [
             'name' => $this->faker->name,
             'message' => $this->faker->text,
-            'sent_count' =>rand(1, 100),
-            'delivered_count' => rand(1, 100),
-            'created_at' => $this->faker->dateTimeBetween('-1 year', 'now')->format('Y-m-d H:i:s'),
+            'sent_count' =>rand(50, 100),
+            'delivered_count' => rand(1, 50),
+            'created_at' => $this->faker->dateTimeBetween('-6 months', 'now')->format('Y-m-d H:i:s'),
         ];
     }
 }
