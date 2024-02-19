@@ -32,6 +32,7 @@ const uploadFile = async () => {
             loading.value = false;
             responseSuccess.value = response.data.message;
             responseError.value = null;
+            location.reload();
         } catch (error) {
             loading.value = false;
             fileInput.value.value = null;
