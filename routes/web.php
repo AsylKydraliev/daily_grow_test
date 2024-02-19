@@ -23,6 +23,6 @@ Route::get('/analytics', [MailingAnalyticsController::class, 'index'])->name('ma
 Route::post('/clients/importExcel', [ClientController::class, 'importExcel'])->name('clients.importExcel');
 Route::post('/mailings/setActive/{mailing}', [MailingController::class, 'setActive'])->name('mailings.setActive');
 
-Route::resource('/clients', ClientController::class);
-Route::resource('/mailings', MailingController::class);
+Route::resource('/clients', ClientController::class)->only(['index', 'create', 'store']);
+Route::resource('/mailings', MailingController::class)->only(['index', 'create', 'store']);
 

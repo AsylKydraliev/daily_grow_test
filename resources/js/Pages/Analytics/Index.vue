@@ -91,9 +91,6 @@ watch(period, value => {
                         Название
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Статус
-                    </th>
-                    <th scope="col" class="px-6 py-3">
                         Отправлено
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -106,8 +103,6 @@ watch(period, value => {
                     <th scope="row" class="px-6 py-4 font-bold text-gray-900 whitespace-nowrap dark:text-white">
                         Итого
                     </th>
-                    <td class="px-6 py-4">
-                    </td>
                     <td class="px-6 py-4">
                     </td>
                     <td class="px-6 py-4 font-bold text-black">
@@ -126,12 +121,6 @@ watch(period, value => {
                     </th>
                     <td class="px-6 py-4">
                         {{ mailingAnalytic.name }}
-                    </td>
-                    <td class="px-6 py-4">
-                        <span
-                            class="bg-green-300 text-gray-600 text-xs font-medium me-2 px-4 py-0.5 rounded-full dark:bg-blue-900 dark:text-blue-300">
-                                                    {{ mailingAnalytic.status ?? 'Работает' }}
-                        </span>
                     </td>
                     <td class="px-6 py-4">
                         {{ mailingAnalytic.sent_count ?? 0 }}

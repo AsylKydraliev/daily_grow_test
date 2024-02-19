@@ -15,7 +15,7 @@ class SmsSendService
      */
     public function sendSMS($login, $password, $phones, $message): mixed
     {
-        $response = Http::post('https://smsc.ru/rest/send/', [
+        $response = Http::post(env('SMS_SEND_API'), [
             'login' => $login,
             'psw' => $password,
             'phones' => $phones,
