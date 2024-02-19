@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $message
  * @property int $sent_count
  * @property int $delivered_count
+ * @property int $is_active
  *
  * @mixin Builder
  */
@@ -19,9 +20,13 @@ class Mailing extends Model
 {
     use HasFactory;
 
+    const MAILING_IS_ACTIVE = 1;
+    const MAILING_IS_NOT_ACTIVE = 0;
+
     protected $fillable = [
         'name',
         'message',
+        'is_active',
     ];
 
     /**

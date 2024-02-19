@@ -9,6 +9,7 @@ const props = defineProps({
 });
 
 const tabs = ['Список клиентов', 'Загрузка клиентов'];
+
 const tabComponents = [
     {
         name: ClientsList,

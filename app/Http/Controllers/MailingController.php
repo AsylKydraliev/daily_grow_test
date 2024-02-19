@@ -19,8 +19,11 @@ class MailingController extends Controller
             ->orderByDesc('created_at')
             ->paginate(10);
 
+        $activeMailing = Mailing::query()->where('is_active', Mailing::MAILING_IS_ACTIVE)->first();
+
         return Inertia::render('Mailings/Index', [
-            'mailings' => $mailings
+            'mailings' => $mailings,
+            'activeMailing' => $activeMailing ?? [],
         ]);
     }
 
@@ -41,5 +44,20 @@ class MailingController extends Controller
         Mailing::query()->create($request->validated());
 
         return to_route('mailings.index');
+    }
+
+    /**
+     * @param Mailing $mailing
+     * @return void
+     */
+    public function setActive(Mailing $mailing): void
+    {
+        $mailing->is_active = Mailing::MAILING_IS_ACTIVE;
+        $mailing->save();
+
+        // Обновляем все остальные записи, чтобы установить неактивное состояние
+        Mailing::query()
+            ->where('id', '!=', $mailing->id)
+            ->update(['is_active' => Mailing::MAILING_IS_NOT_ACTIVE]);
     }
 }

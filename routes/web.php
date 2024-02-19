@@ -24,6 +24,7 @@ Route::get('/', function () {
 Route::resource('/clients', ClientController::class);
 Route::resource('/mailings', MailingController::class);
 
-Route::post('/clients/importExcel', [ClientController::class, 'importExcel'])->name('clients.importExcel');
 Route::get('/analytics', [MailingAnalyticsController::class, 'index'])->name('mailings.analytics');
+Route::post('/clients/importExcel', [ClientController::class, 'importExcel'])->name('clients.importExcel');
+Route::post('/mailings/setActive/{mailing}', [MailingController::class, 'setActive'])->name('mailings.setActive');
 

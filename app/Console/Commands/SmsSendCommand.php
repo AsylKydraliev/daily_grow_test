@@ -43,24 +43,24 @@ class SmsSendCommand extends Command
             ->pluck('phone')
             ->toArray();
 
-        $mailing = Mailing::query()->latest()->first();
-
         $phones_list = implode(", ", $clientPhones);
 
-        if (!empty($clientPhones)) {
+        $activeMailing = Mailing::query()->where('is_active', Mailing::MAILING_IS_ACTIVE)->first();
+
+        if (!empty($clientPhones) && $activeMailing) {
             $response = $this->smsService->sendSMS(
                 env('SMS_SEND_API_LOGIN'),
                 env('SMS_SEND_API_PASSWORD'),
                 $phones_list,
-                $mailing->message
+                $activeMailing->message
             );
 
             if (!$response['error_code']) {
-                $mailing->delivered_count += count($clientPhones);
+                $activeMailing->delivered_count += count($clientPhones);
             }
 
-            $mailing->sent_count += count($clientPhones);
-            $mailing->save();
+            $activeMailing->sent_count += count($clientPhones);
+            $activeMailing->save();
         }
     }
 }
