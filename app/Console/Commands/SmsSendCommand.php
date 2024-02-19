@@ -37,24 +37,17 @@ class SmsSendCommand extends Command
     public function handle(): void
     {
         $nextWeek = now()->addDays(7);
-        $clients = Client::query()
+        $clientPhones = Client::query()
             ->whereMonth('birthday', '=', $nextWeek->month)
             ->whereDay('birthday', '=', $nextWeek->day)
-            ->get();
+            ->pluck('phone')
+            ->toArray();
 
         $mailing = Mailing::query()->latest()->first();
 
-        $phones = [];
+        $phones_list = implode(", ", $clientPhones);
 
-        foreach ($clients as $client) {
-            $recipient = $client->email;
-            if ($recipient) {
-                $phones[] = $client->phone;
-            }
-        }
-        $phones_list = implode(", ", $phones);
-
-        if (!empty($phones)) {
+        if (!empty($clientPhones)) {
             $response = $this->smsService->sendSMS(
                 env('SMS_SEND_API_LOGIN'),
                 env('SMS_SEND_API_PASSWORD'),
@@ -63,10 +56,10 @@ class SmsSendCommand extends Command
             );
 
             if (!$response['error_code']) {
-                $mailing->delivered_count += count($phones);
+                $mailing->delivered_count += count($clientPhones);
             }
 
-            $mailing->sent_count += count($phones);
+            $mailing->sent_count += count($clientPhones);
             $mailing->save();
         }
     }

@@ -49,6 +49,10 @@ class ClientController extends Controller
         return to_route('clients.index');
     }
 
+    /**
+     * @param Request $request
+     * @return JsonResponse|Response
+     */
     public function importExcel(Request $request): JsonResponse|Response
     {
         try {
@@ -65,7 +69,11 @@ class ClientController extends Controller
         }
     }
 
-    private function processExcelData(Request $request)
+    /**
+     * @param Request $request
+     * @return array
+     */
+    private function processExcelData(Request $request): array
     {
         $clients = [];
 
@@ -94,6 +102,10 @@ class ClientController extends Controller
         return array_filter($clients);
     }
 
+    /**
+     * @param $file
+     * @return bool
+     */
     private function isValidFileExtension($file): bool
     {
         $extension = $file->getClientOriginalExtension();
@@ -109,6 +121,10 @@ class ClientController extends Controller
             !empty($data['den_rozdeniia']);
     }
 
+    /**
+     * @param array $data
+     * @return Client
+     */
     private function saveClientsFromExcel(array $data): Client
     {
         $excelBaseDate = strtotime('1899-12-30');
@@ -125,58 +141,4 @@ class ClientController extends Controller
 
         return $client;
     }
-
-//    /**
-//     * @param Request $request
-//     * @return JsonResponse|Response
-//     */
-//    public function importExcel(Request $request): JsonResponse|Response
-//    {
-//        try {
-//            $clients = [];
-//
-//            if ($request->hasFile('file')) {
-//                $file = $request->file('file');
-//
-//                if ($file->getClientOriginalExtension() == 'xlsx' || $file->getClientOriginalExtension() == 'xls') {
-//                    $importedData = Excel::toArray(new ClientsImport, $file);
-//
-//                    foreach ($importedData[0] as $data) {
-//                        if (!empty($data['fio']) ||
-//                            !empty($data['telefon']) ||
-//                            !empty($data['email']) ||
-//                            !empty($data['den_rozdeniia'])
-//                        ) {
-//                            $excelBaseDate = strtotime('1899-12-30');
-//                            $birthday = date('Y-m-d', $excelBaseDate + $data['den_rozdeniia'] * 86400);
-//                            $phoneNumber = str_replace('=', '', $data['telefon']);
-//
-//                            $client = new Client([
-//                                'name' => $data['fio'],
-//                                'phone' => $phoneNumber,
-//                                'email' => $data['email'],
-//                                'birthday' => $birthday,
-//                            ]);
-//                            $client->save();
-//                            $clients[] = $client;
-//                        }
-//                    }
-//
-//                    $dataWithoutEmptyStrings = array_filter($clients, function ($value) {
-//                        return !empty($value);
-//                    });
-//                } else {
-//                    $error = 'Недопустимый формат файла!';
-//                    return response()->json(['error' => $error], 400);
-//                }
-//            } else {
-//                $error = 'Файл не был загружен.';
-//                return response()->json(['error' => $error], 400);
-//            }
-//
-//            return response()->json(['clients' => $dataWithoutEmptyStrings, 'message' => 'Список клитентов успешно загружен']);
-//        } catch (Exception $e) {
-//            return response()->json(['error' => 'Произошла ошибка при попытке сохранения данных'], 500);
-//        }
-//    }
 }

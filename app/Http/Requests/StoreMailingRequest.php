@@ -23,7 +23,7 @@ class StoreMailingRequest extends FormRequest
     {
         return [
             'name' => 'required|max:255',
-            'message' => 'required',
+            'message' => 'required|max:1000',
         ];
     }
 }
