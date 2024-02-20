@@ -1,7 +1,10 @@
 <script setup>
-import {Link} from "@inertiajs/vue3";
+import {Link, router} from "@inertiajs/vue3";
 import Dropdown from "@/Components/Dropdown.vue";
 import DropdownLink from "@/Components/DropdownLink.vue";
+import {ref} from "vue";
+
+const currentUrl = ref(router.page.url);
 </script>
 
 <template>
@@ -18,8 +21,9 @@ import DropdownLink from "@/Components/DropdownLink.vue";
                             <Link
                                 :href="route('dashboard')"
                                 class="flex items-center p-2 space-x-3 rounded-md"
+                                :class="{ 'active': currentUrl === '/dashboard' }"
                             >
-                                <img src="../../../public/assets/icon-dashboard.png" alt="analytics"/>
+                                <img src="../../../public/assets/icon-dashboard.png" alt="dashboard"/>
                                 <span>Dashboard</span>
                             </Link>
                         </li>
@@ -27,8 +31,9 @@ import DropdownLink from "@/Components/DropdownLink.vue";
                             <Link
                                 :href="route('clients.index')"
                                 class="flex items-center p-2 space-x-3 rounded-md"
+                                :class="{ 'active': currentUrl === '/clients' }"
                             >
-                                <img src="../../../public/assets/research.png" alt="analytics"/>
+                                <img src="../../../public/assets/research.png" alt="clients"/>
                                 <span>Клиенты</span>
                             </Link>
                         </li>
@@ -36,8 +41,9 @@ import DropdownLink from "@/Components/DropdownLink.vue";
                             <Link
                                 :href="route('mailings.index')"
                                 class="flex items-center p-2 space-x-3 rounded-md"
+                                :class="{ 'active': currentUrl === '/mailings' }"
                             >
-                                <img src="../../../public/assets/chat.png" alt="analytics"/>
+                                <img src="../../../public/assets/chat.png" alt="mailings"/>
 
                                 <span>Рассылки</span>
                             </Link>
@@ -46,6 +52,7 @@ import DropdownLink from "@/Components/DropdownLink.vue";
                             <Link
                                 :href="route('mailings.analytics')"
                                 class="flex items-center p-2 space-x-3 rounded-md"
+                                :class="{ 'active': currentUrl === '/analytics' }"
                             >
                                 <img src="../../../public/assets/analytics.png" alt="analytics"/>
 
@@ -119,3 +126,12 @@ import DropdownLink from "@/Components/DropdownLink.vue";
         </div>
     </div>
 </template>
+
+<style scoped>
+.active {
+    background: whitesmoke;
+    box-shadow: rgba(99, 99, 99, 0.2) 0 2px 8px 0;
+    color: #1e53c7;
+    font-weight: 600;
+}
+</style>
